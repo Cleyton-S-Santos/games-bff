@@ -1,7 +1,8 @@
 FROM maven:3.9.8-amazoncorretto-21 AS build
 WORKDIR /app
 COPY . .
-ENV PORT=8080
+ENV PORT=$PORT
+ENV AUTH_SERVICE_URL=$AUTH_SERVICE_URL
 
 RUN mvn clean package -DskipTests
 
