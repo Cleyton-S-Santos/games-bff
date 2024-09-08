@@ -11,25 +11,25 @@ import java.util.List;
 @FeignClient(name = "CoreGamesClient", url = "${games.service.url}")
 public interface CoreGamesClient {
     @GetMapping("/feedback/game/{gameId}")
-    ResponseEntity<GameFeedbackResponseCountDto> getGameFeedbacks(@PathVariable("gameId") String id);
+    GameFeedbackResponseCountDto getGameFeedbacks(@PathVariable("gameId") String id);
 
     @PostMapping("/feedback/create")
-    ResponseEntity<GameFeedbackResponseDTO> createGameFeedback(@RequestBody GameFeedbackRequestDTO gameFeedbackRequestDTO);
+    GameFeedbackResponseDTO createGameFeedback(@RequestBody GameFeedbackRequestDTO gameFeedbackRequestDTO);
 
     @GetMapping("/category/search")
-    ResponseEntity<List<GamesCategoryEntity>> searchCategory(@RequestParam String input);
+    List<GamesCategoryEntity> searchCategory(@RequestParam String input);
 
     @GetMapping("/category/list")
-    ResponseEntity<List<GamesCategoryEntity>> listCategory();
+    List<GamesCategoryEntity> listCategory();
 
     @PostMapping("/category/create")
-    ResponseEntity<GamesCategoryResponseDTO> createCategory(@RequestBody() GamesCategoryRequestDTO data);
+    GamesCategoryResponseDTO createCategory(@RequestBody() GamesCategoryRequestDTO data);
 
     @GetMapping("/game/{id}")
-    ResponseEntity<GamesEntity> getGameById(@PathVariable("id") String id);
+    GamesEntity getGameById(@PathVariable("id") Long id);
 
     @GetMapping("/game/v2/list")
-    ResponseEntity<Page<GameResponseDTO>> listGamePage(
+    Page<GameResponseDTO> listGamePage(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "15") int size
     );

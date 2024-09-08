@@ -25,36 +25,36 @@ public class GameController {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "15") int size
     ){
-        return this.gamesService.listGamesPage(page, size);
+        return ResponseEntity.ok(this.gamesService.listGamesPage(page, size));
     }
 
     @GetMapping("/feedback/game/{gameId}")
     ResponseEntity<GameFeedbackResponseCountDto> getGameFeedbacks(@PathVariable("gameId") String id){
-        return this.gamesService.listGameFeedback(id);
+        return ResponseEntity.ok(this.gamesService.listGameFeedback(id));
     };
 
     @PostMapping("/feedback/create")
     ResponseEntity<GameFeedbackResponseDTO> createGameFeedback(@RequestBody GameFeedbackRequestDTO gameFeedbackRequestDTO){
-        return this.gamesService.createGameFeedback(gameFeedbackRequestDTO);
+        return ResponseEntity.ok(this.gamesService.createGameFeedback(gameFeedbackRequestDTO));
     };
 
     @GetMapping("/category/search")
     ResponseEntity<List<GamesCategoryEntity>> searchCategory(@RequestParam String input){
-        return this.gamesService.searchCategory(input);
+        return ResponseEntity.ok(this.gamesService.searchCategory(input));
     };
 
     @GetMapping("/category/list")
     ResponseEntity<List<GamesCategoryEntity>> listCategory(){
-        return this.gamesService.listCategory();
+        return ResponseEntity.ok(this.gamesService.listCategory());
     };
 
     @PostMapping("/category/create")
     ResponseEntity<GamesCategoryResponseDTO> createCategory(@RequestBody() GamesCategoryRequestDTO data){
-        return this.gamesService.createCategory(data);
+        return ResponseEntity.ok(this.gamesService.createCategory(data));
     };
     @GetMapping("/game/{id}")
-    ResponseEntity<GamesEntity> getGameById(@PathVariable("id") String id){
-        return this.gamesService.getGameById(id);
+    ResponseEntity<GamesEntity> getGameById(@PathVariable("id") Long id){
+        return ResponseEntity.ok(this.gamesService.getGameById(id));
     };
 
 }
