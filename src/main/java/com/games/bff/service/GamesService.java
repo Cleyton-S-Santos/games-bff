@@ -1,14 +1,12 @@
 package com.games.bff.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.games.bff.client.AuthClient;
 import com.games.bff.client.CoreGamesClient;
 import com.games.bff.dtos.games.*;
 import com.games.bff.exceptions.CustomFeignException;
 import feign.FeignException;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,7 +23,7 @@ public class GamesService {
         this.objectMapper = objectMapper;
     }
 
-    public ResponseEntity<Page<GameResponseDTO>> listGamesPage(int page, int size){
+    public Page<GameResponseDTO> listGamesPage(int page, int size){
         try {
             return coreGamesClient.listGamePage(page, size);
         } catch (FeignException feignException) {
@@ -47,7 +45,7 @@ public class GamesService {
         }
     }
 
-    public ResponseEntity<GameFeedbackResponseCountDto> listGameFeedback(String id){
+    public GameFeedbackResponseCountDto listGameFeedback(String id){
         try {
             return coreGamesClient.getGameFeedbacks(id);
         } catch (FeignException feignException) {
@@ -69,7 +67,7 @@ public class GamesService {
         }
     }
 
-    public ResponseEntity<GameFeedbackResponseDTO> createGameFeedback(GameFeedbackRequestDTO gameFeedbackRequestDTO){
+    public GameFeedbackResponseDTO createGameFeedback(GameFeedbackRequestDTO gameFeedbackRequestDTO){
         try {
             return coreGamesClient.createGameFeedback(gameFeedbackRequestDTO);
         } catch (FeignException feignException) {
@@ -91,7 +89,7 @@ public class GamesService {
         }
     }
 
-    public ResponseEntity<List<GamesCategoryEntity>> searchCategory(String input){
+    public List<GamesCategoryEntity> searchCategory(String input){
         try {
             return coreGamesClient.searchCategory(input);
         } catch (FeignException feignException) {
@@ -113,7 +111,7 @@ public class GamesService {
         }
     }
 
-    public ResponseEntity<List<GamesCategoryEntity>> listCategory(){
+    public List<GamesCategoryEntity> listCategory(){
         try {
             return coreGamesClient.listCategory();
         } catch (FeignException feignException) {
@@ -135,7 +133,7 @@ public class GamesService {
         }
     }
 
-    public ResponseEntity<GamesCategoryResponseDTO> createCategory(GamesCategoryRequestDTO data){
+    public GamesCategoryResponseDTO createCategory(GamesCategoryRequestDTO data){
         try {
             return coreGamesClient.createCategory(data);
         } catch (FeignException feignException) {
@@ -157,7 +155,7 @@ public class GamesService {
         }
     }
 
-    public ResponseEntity<GamesEntity> getGameById(String id){
+    public GamesEntity getGameById(Long id){
         try {
             return coreGamesClient.getGameById(id);
         } catch (FeignException feignException) {
