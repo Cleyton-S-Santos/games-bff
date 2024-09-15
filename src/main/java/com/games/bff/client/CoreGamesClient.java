@@ -33,4 +33,18 @@ public interface CoreGamesClient {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "15") int size
     );
+
+    @GetMapping("/game/search/{gameName}")
+    Page<GameResponseDTO> listGameByNamePage(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "15") int size,
+            @RequestParam(defaultValue = "15") String gameName
+    );
+
+    @GetMapping("/game/category/{categoryId}")
+    Page<GameResponseDTO> listGameByCategoryIdPage(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "15") int size,
+            @RequestParam(defaultValue = "15") int categoryId
+    );
 }

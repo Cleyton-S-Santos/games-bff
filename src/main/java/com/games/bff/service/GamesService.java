@@ -176,4 +176,48 @@ public class GamesService {
             throw new CustomFeignException(errorMessage, statusCode);
         }
     }
+
+    public Page<GameResponseDTO> getGameByCategoryId(int page, int size, int id){
+        try {
+            return coreGamesClient.listGameByCategoryIdPage(page, size, id);
+        } catch (FeignException feignException) {
+            String errorMessage = "Erro desconhecido ao listar games.";
+            int statusCode = feignException.status();
+
+            try {
+                String responseBody = feignException.contentUTF8();
+                Map<String, Object> errorAttributes = objectMapper.readValue(responseBody, Map.class);
+                errorMessage = (String) errorAttributes.get("message");
+                statusCode = (int) errorAttributes.get("statusCode");
+
+            } catch (Exception parsingException) {
+                errorMessage = "Erro desconhecido";
+                statusCode = HttpStatus.BAD_REQUEST.value();
+                parsingException.printStackTrace();
+            }
+            throw new CustomFeignException(errorMessage, statusCode);
+        }
+    }
+
+    public Page<GameResponseDTO> listGameByNamePage(int page, int size, String gameName){
+        try {
+            return coreGamesClient.listGameByNamePage(page, size, gameName);
+        } catch (FeignException feignException) {
+            String errorMessage = "Erro desconhecido ao listar games.";
+            int statusCode = feignException.status();
+
+            try {
+                String responseBody = feignException.contentUTF8();
+                Map<String, Object> errorAttributes = objectMapper.readValue(responseBody, Map.class);
+                errorMessage = (String) errorAttributes.get("message");
+                statusCode = (int) errorAttributes.get("statusCode");
+
+            } catch (Exception parsingException) {
+                errorMessage = "Erro desconhecido";
+                statusCode = HttpStatus.BAD_REQUEST.value();
+                parsingException.printStackTrace();
+            }
+            throw new CustomFeignException(errorMessage, statusCode);
+        }
+    }
 }
